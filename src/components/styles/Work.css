@@ -34,15 +34,7 @@
   border-bottom: 1px solid #363636;
 }
 
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
 .carousel-slide {
-  min-width: 100%;
-  flex-shrink: 0;
   box-sizing: border-box;
   padding: 50px 0;
 }
@@ -56,6 +48,7 @@
 
 .carousel-info {
   flex: 1;
+  min-width: 0;
   display: flex;
   gap: 30px;
   align-items: flex-start;
@@ -109,9 +102,12 @@
 
 .carousel-image-wrapper {
   flex: 1;
+  min-width: 0;
+  max-width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 /* ── Navigation Arrows ── */
@@ -143,11 +139,11 @@
 }
 
 .carousel-arrow-left {
-  left: -70px;
+  left: -25px;
 }
 
 .carousel-arrow-right {
-  right: -70px;
+  right: -25px;
 }
 
 /* ── Dot Indicators ── */
@@ -189,6 +185,9 @@
 
 .work-image-in {
   position: relative;
+  width: 100%;
+  display: block;
+  line-height: 0;
 }
 
 .work-link {
@@ -228,19 +227,21 @@
 }
 
 .work-image img {
-  max-width: 100%;
+  width: 100%;
   max-height: 400px;
+  object-fit: cover;
   border-radius: 8px;
+  display: block;
 }
 
 /* ── Responsive ── */
 @media only screen and (max-width: 1600px) {
   .carousel-arrow-left {
-    left: -60px;
+    left: -25px;
   }
 
   .carousel-arrow-right {
-    right: -60px;
+    right: -25px;
   }
 }
 
@@ -261,12 +262,16 @@
     gap: 40px;
   }
 
+  .carousel-wrapper {
+    padding: 0 60px;
+  }
+
   .carousel-arrow-left {
-    left: 10px;
+    left: 0;
   }
 
   .carousel-arrow-right {
-    right: 10px;
+    right: 0;
   }
 }
 
@@ -282,6 +287,7 @@
 
   .carousel-image-wrapper {
     width: 100%;
+    max-width: 100%;
   }
 
   .carousel-arrow {

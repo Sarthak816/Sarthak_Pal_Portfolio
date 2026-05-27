@@ -11,18 +11,61 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-const textureLoader = new THREE.TextureLoader();
+// All tech images - local files from public/images/
 const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+  "/images/react.webp",         // React
+  "/images/next2.webp",         // Next.js
+  "/images/typescript.webp",    // TypeScript
+  "/images/tailwindcss.svg",    // Tailwind CSS
+  "/images/reactflow.svg",      // React Flow
+  "/images/framermotion.svg",   // Framer Motion
+  "/images/node.webp",          // Node.js
+  "/images/express.webp",       // Express
+  "/images/fastapi.svg",        // FastAPI
+  "/images/python.webp",        // Python
+  "/images/docker.webp",        // Docker
+  "/images/gemini.svg",         // Gemini API
+  "/images/langchain.svg",      // LangChain
+  "/images/huggingface.svg",    // HuggingFace
+  "/images/anthropic.svg",      // Anthropic Claude
+  "/images/openai.svg",         // OpenAI API
+  "/images/postgresql.svg",     // PostgreSQL
+  "/images/mongo.webp",         // MongoDB
+  "/images/mysql.webp",         // MySQL
+  "/images/prisma.svg",         // Prisma
+  "/images/git.svg",            // Git
+  "/images/githubactions.svg",  // GitHub Actions
+  "/images/vercel.svg",         // Vercel
+  "/images/javascript.webp",    // JavaScript
+  "/images/java.svg",           // Java
+  "/images/aws.svg",            // AWS
+  "/images/triggerdev.png",     // Trigger.dev
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
+
+function loadTextureWithBackground(url: string): THREE.Texture {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d")!;
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.center.set(0.5, 0.5);
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+
+  const img = new Image();
+  img.onload = () => {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 256, 256);
+    const padding = 56;
+    ctx.drawImage(img, padding, padding, 256 - padding * 2, 256 - padding * 2);
+    texture.needsUpdate = true;
+  };
+  img.src = url;
+  return texture;
+}
+
+const textures = imageUrls.map((url) => loadTextureWithBackground(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
@@ -34,7 +77,7 @@ type SphereProps = {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
+  material: THREE.MeshStandardMaterial;
   isActive: boolean;
 };
 
@@ -85,7 +128,6 @@ function SphereGeo({
         scale={scale}
         geometry={sphereGeometry}
         material={material}
-        rotation={[0.3, 1, 1]}
       />
     </RigidBody>
   );
@@ -151,24 +193,21 @@ const TechStack = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
-        new THREE.MeshPhysicalMaterial({
+        new THREE.MeshStandardMaterial({
           map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
+          roughness: 0.4,
+          metalness: 0.1,
         })
     );
   }, []);
 
   return (
     <div className="techstack">
-      <h2> My Techstack</h2>
+      <h2> My Tech Stack</h2>
 
       <Canvas
         shadows
@@ -193,7 +232,7 @@ const TechStack = () => {
             <SphereGeo
               key={i}
               {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              material={materials[i % materials.length]}
               isActive={isActive}
             />
           ))}

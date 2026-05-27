@@ -5,32 +5,46 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "CallHQ",
-    category: "Voice AI Calling Platform",
-    tools: "Voice AI, Calling Automation, CRM Integrations",
-    image: "/images/callhq.png",
-    link: "https://callhq.ai",
+    title: "NextFlow",
+    category: "Visual LLM Workflow Engine",
+    tools: "Next.js 15, TypeScript, React Flow, Trigger.dev, Gemini API, PostgreSQL",
+    image: "/images/nextflow.png",
+    link: "https://nextflow-roan.vercel.app/",
   },
   {
-    title: "Whatsapp Automation",
-    category: "WABA Application",
-    tools: "WhatsApp Business API, Workflow Automation, Notifications",
-    image: "/images/whatsapp.png",
-    link: "https://whatsapp.callhq.ai",
+    title: "Sahayak",
+    category: "AI Workflow Automation Platform",
+    tools: "Python, FastAPI, LangChain, HuggingFace, Docker, Vue (Frontend)",
+    image: "/images/sahayak.png",
+    link: "https://github.com/Sarthak816/Sahayak",
   },
   {
-    title: "Broki",
-    category: "Real Estate Platform for FnB Industry",
-    tools: "Property Discovery, Lead Management, Marketplace Workflows",
-    image: "/images/broki.png",
-    link: "https://broki.in",
+    title: "REBOUND",
+    category: "AI Student Recovery Platform",
+    tools: "React, Vite, Tailwind CSS, Node.js, Express, MongoDB",
+    image: "/images/rebound.png",
+    link: "http://couch-potato-amuhacks-5-0.vercel.app/",
   },
   {
-    title: "Orrdr.com",
-    category: "Ecommerce Platform and Mobile App",
-    tools: "Ecommerce, Mobile Experience, Order Management",
-    image: "/images/orrdr.png",
-    link: "https://orrdr.com",
+    title: "Protec-X",
+    category: "Real-Time Fraud Detection System",
+    tools: "Java, MySQL, JDBC, Multithreading, MVC Architecture",
+    image: "/images/protecx.png",
+    link: "https://github.com/Sarthak816/Protec-X",
+  },
+  {
+    title: "AI-Code-Review-Bot",
+    category: "Automated AI Code Review Tool",
+    tools: "JavaScript, OpenAI API, GitHub Actions, Webhooks",
+    image: "/images/sapphire.png",
+    link: "https://github.com/Sarthak816/AI-Code-Review-Bot",
+  },
+  {
+    title: "Velync AI",
+    category: "AI-Powered SaaS Platform",
+    tools: "TypeScript, Next.js, AI/LLM Integration",
+    image: "/images/Solidx.png",
+    link: "https://github.com/Sarthak816/Velync-AI",
   },
 ];
 
@@ -88,40 +102,29 @@ const Work = () => {
 
           {/* Slides */}
           <div className="carousel-track-container">
-            <div
-              className="carousel-track"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-              }}
-            >
-              {projects.map((project, index) => (
-                <div className="carousel-slide" key={index}>
-                  <div className="carousel-content">
-                    <div className="carousel-info">
-                      <div className="carousel-number">
-                        <h3>0{index + 1}</h3>
-                      </div>
-                      <div className="carousel-details">
-                        <h4>{project.title}</h4>
-                        <p className="carousel-category">
-                          {project.category}
-                        </p>
-                        <div className="carousel-tools">
-                          <span className="tools-label">Tools & Features</span>
-                          <p>{project.tools}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="carousel-image-wrapper">
-                      <WorkImage
-                        image={project.image}
-                        alt={project.title}
-                        link={project.link}
-                      />
+            <div className="carousel-slide" key={currentIndex}>
+              <div className="carousel-content">
+                <div className="carousel-info">
+                  <div className="carousel-number">
+                    <h3>{String(currentIndex + 1).padStart(2, "0")}</h3>
+                  </div>
+                  <div className="carousel-details">
+                    <h4>{projects[currentIndex].title}</h4>
+                    <p className="carousel-category">{projects[currentIndex].category}</p>
+                    <div className="carousel-tools">
+                      <span className="tools-label">Tools & Features</span>
+                      <p>{projects[currentIndex].tools}</p>
                     </div>
                   </div>
                 </div>
-              ))}
+                <div className="carousel-image-wrapper">
+                  <WorkImage
+                    image={projects[currentIndex].image}
+                    alt={projects[currentIndex].title}
+                    link={projects[currentIndex].link}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
